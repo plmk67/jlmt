@@ -3,8 +3,8 @@ module.exports = {
     {
       resolve: "gatsby-source-contentful",
       options: {
-        accessToken: "CFPAT-_GsF3S9h_MchCD1mva6THUpwfKqJob0MOCHMfdZfRAQ",
-        spaceId: "",
+        accessToken: "wGmQXQsbZ71BWCiBUsCsYAzRtcZ_OMG_KFXBCX61myA",
+        spaceId: "y8xs8bpyk93r",
       },
     },
     "gatsby-plugin-sharp",
