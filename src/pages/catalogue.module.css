@@ -1,0 +1,39 @@
+.columnStyle {
+    width: 20%;
+    text-align: left;
+  };
+
+.indexColumnStyle{
+    width: 20%;
+    text-align: left;
+    padding-bottom: 21px;
+    align-items: center;
+  };
+
+.tableStyle = {
+    width: 100%;
+    padding: 30px;
+  };
+
+.tableHeaderStyle = {
+    text-align: left;
+    cursor: pointer;
+  };
+
+.tableHeaderRow:hover{
+    color: #008B8B;
+};
+
+.typeFilter{
+    cursor: pointer;
+    
+  };
+
+.typeFilter:hover {
+    color: green;
+  };
+
+.filterStatusStyle {
+    display: flex;
+    cursor: pointer;
+  };

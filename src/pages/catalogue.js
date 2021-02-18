@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { Container, Table } from "reactstrap";
+import styles from "./catalogue.module.css";
 import {
   HiOutlineArrowNarrowUp,
   HiOutlineArrowNarrowDown,
@@ -29,49 +30,7 @@ const Catalogue = () => {
 
   console.log(typeDesc[0].node.tags);
 
-  const columnStyle = {
-    width: "20%",
-    textAlign: "left",
-    "&:hover": {
-      color: "white",
-      backgroundColor: "grey",
-    },
-  };
-
-  const indexColumnStyle = {
-    width: "20%",
-    textAlign: "left",
-    paddingBottom: "21px",
-    alignItems: "center",
-  };
-
-  const tableStyle = {
-    width: "100%",
-    padding: "30px",
-  };
-
-  const tableHeaderStyle = {
-    textAlign: "left",
-    cursor: "pointer",
-  };
-
-  const tableHeaderRow = {
-    "&:hover": {
-      color: "008B8B",
-    },
-  };
-
-  const typeFilter = {
-    cursor: "pointer",
-    "&:hover": {
-      color: "green",
-    },
-  };
-
-  const filterStatusStyle = {
-    display: "flex",
-    cursor: "pointer",
-  };
+  //convert all const into CSS
 
   //tag filter function
 
@@ -149,29 +108,35 @@ const Catalogue = () => {
       <h1>Catalogue Page</h1>
       <h3>Index</h3>
 
-      {/* toDo: figure why hidden property did not work for Container */}
-
-      <span onClick={() => closeTagFilter()} style={filterStatusStyle}>
-        <p hidden={tagHidden}>Filter: [X] {tagSelected}</p>
-      </span>
+      {!tagHidden && (
+        <span
+          onClick={() => closeTagFilter()}
+          className={styles.filterStatusStyle}
+        >
+          <p>Filter: [X] {tagSelected}</p>
+        </span>
+      )}
 
       <Container>
-        <Table borderless style={tableStyle}>
+        <Table borderless className={styles.tableStyle}>
           <thead>
-            <tr style={tableHeaderStyle}>
-              <th onClick={() => toggle(index)} style={indexColumnStyle}>
+            <tr className={styles.tableHeaderStyle}>
+              <th onClick={() => toggle(index)} className={styles.columnStyle}>
                 #
               </th>
-              <th onClick={() => toggle(submissionDate)} style={columnStyle}>
+              <th
+                onClick={() => toggle(submissionDate)}
+                className={styles.columnStyle}
+              >
                 date
               </th>
-              <th onClick={() => toggle(title)} style={columnStyle}>
+              <th onClick={() => toggle(title)} className={styles.columnStyle}>
                 filename
               </th>
-              <th onClick={() => toggle(type)} style={columnStyle}>
+              <th onClick={() => toggle(type)} className={styles.columnStyle}>
                 type
               </th>
-              <th onClick={() => toggle(genre)} style={columnStyle}>
+              <th onClick={() => toggle(genre)} className={styles.columnStyle}>
                 genre
               </th>
             </tr>
@@ -180,21 +145,23 @@ const Catalogue = () => {
             {table.map((item) => {
               return (
                 <tr>
-                  <td style={columnStyle}>{item.node.submission}</td>
-                  <td style={columnStyle}>{item.node.submissionDate}</td>
+                  <td className={styles.columnStyle}>{item.node.submission}</td>
+                  <td className={styles.columnStyle}>
+                    {item.node.submissionDate}
+                  </td>
                   <td
                     onMouseOver={() => onHover(item.node.title)}
-                    style={columnStyle}
+                    className={styles.columnStyle}
                   >
                     {item.node.title}
                   </td>
-                  <td style={columnStyle}>{item.node.filetype}</td>
-                  <td style={columnStyle}>
+                  <td className={styles.columnStyle}>{item.node.filetype}</td>
+                  <td className={styles.columnStyle}>
                     {typeDesc[0].node.tags.map((tag, i) => {
                       if (typeDesc[0].node.tags.length === i + 1) {
                         return (
                           <td
-                            style={typeFilter}
+                            className={styles.typeFilter}
                             onClick={() => tagFilter(tag.content)}
                           >
                             {tag.content}
@@ -203,7 +170,7 @@ const Catalogue = () => {
                       } else {
                         return (
                           <td
-                            style={typeFilter}
+                            className={styles.typeFilter}
                             onClick={() => tagFilter(tag.content)}
                           >
                             {tag.content},

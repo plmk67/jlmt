@@ -19,4 +19,10 @@ module.exports = {
       __key: "images",
     },
   ],
+  siteMetadata: {
+    title: `test`,
+    description: `test desc`,
+    author: `vincentyip`,
+    siteUrl: `localhost:4200`,
+  },
 };
