@@ -32,3 +32,15 @@
     display: flex;
     cursor: pointer;
   };
+
+.tooltipImage{
+  width: 400px;
+  height: 400px;
+  background-color: pink;
+  border: 5px;
+}
+
+.hoverImage{
+  width: 400px;
+  border: 2px;
+}

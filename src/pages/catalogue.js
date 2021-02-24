@@ -7,6 +7,10 @@ import {
   HiOutlineArrowNarrowDown,
 } from "react-icons/Hi";
 
+import Tippy from "@tippyjs/react/";
+
+import Img from "gatsby-image";
+
 const Catalogue = () => {
   const response = useStaticQuery(catalog);
   const indexAsc = response.indexAsc.edges;
@@ -26,10 +30,6 @@ const Catalogue = () => {
   const [tagHidden, setTagHidden] = useState(true);
   const [tagSelected, setTag] = useState(); //boolean or empty
 
-  const [hoverModal, setModal] = useState(false);
-
-  console.log(typeDesc[0].node.tags);
-
   //convert all const into CSS
 
   //tag filter function
@@ -42,10 +42,6 @@ const Catalogue = () => {
   const closeTagFilter = () => {
     setTagHidden(true);
     setTag();
-  };
-
-  const onHover = (content) => {
-    console.log("the row reacts: " + content);
   };
 
   //toggle sort categories
@@ -90,18 +86,12 @@ const Catalogue = () => {
     setTable(sortTitle);
   };
 
-  //tags
-
-  const tagStatus = (currentTag) => {
-    //default is on
-    if (tagHidden === true) {
-      setTagHidden(false);
-      console.log("tag is here!");
-    } else if (tagHidden === false) {
-      setTagHidden(true);
-      setTag(currentTag);
-    }
-  };
+  //tooltip image hover
+  const HeadlessTippy = () => (
+    <Tippy placement="right" content={<div>My tippy box</div>}>
+      <button>Headless button</button>
+    </Tippy>
+  );
 
   return (
     <div>
@@ -149,13 +139,22 @@ const Catalogue = () => {
                   <td className={styles.columnStyle}>
                     {item.node.submissionDate}
                   </td>
-                  <td
-                    onMouseOver={() => onHover(item.node.title)}
-                    className={styles.columnStyle}
+
+                  <Tippy
+                    delay={10}
+                    placement="auto"
+                    content={
+                      <span className={styles.tooltipImage}>
+                        <Img
+                          className={styles.hoverImage}
+                          fluid={item.node.image[0].fluid}
+                        />
+                      </span>
+                    }
                   >
-                    {item.node.title}
-                  </td>
-                  <td className={styles.columnStyle}>{item.node.filetype}</td>
+                    <td className={styles.columnStyle}>{item.node.title}</td>
+                  </Tippy>
+
                   <td className={styles.columnStyle}>
                     {typeDesc[0].node.tags.map((tag, i) => {
                       if (typeDesc[0].node.tags.length === i + 1) {
@@ -179,6 +178,7 @@ const Catalogue = () => {
                       }
                     })}
                   </td>
+                  <td>genre</td>
                 </tr>
               );
             })}
@@ -205,6 +205,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -231,6 +234,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -257,6 +263,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -283,6 +292,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -311,6 +323,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -339,6 +354,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -365,6 +383,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -391,6 +412,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -417,6 +441,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
@@ -443,6 +470,9 @@ export const catalog = graphql`
             contentful_id
             title
             description
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid
+            }
           }
           spaceId
           submission
